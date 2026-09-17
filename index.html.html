@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><title>Fuchka Frenzy | BSA Club Fair</title><style>html{color-scheme:light dark}body{margin:0;padding:24px 12px;background:light-dark(#eaf0e8,#0c1915)}main{max-width:780px;margin:0 auto}.cursor-interaction{cursor:pointer}button:disabled{cursor:default}@media(max-width:470px){body{padding:8px}}</style></head><body><main>
+<div id="bsa-fuchka-game">
+  <style>
+    #bsa-fuchka-game {
+      --ff-paper: light-dark(#fff9ee, #162b26);
+      --ff-panel: light-dark(#ffffff, #203b33);
+      --ff-ink: light-dark(#153d30, #f9f2df);
+      --ff-quiet: light-dark(#53685e, #bcd0c5);
+      --ff-line: light-dark(#d9e3d9, #496157);
+      --ff-green: light-dark(#006b4f, #a8ebbd);
+      --ff-on-green: light-dark(#ffffff, #123927);
+      --ff-red: light-dark(#b6353e, #ffb0b2);
+      --ff-soft: light-dark(#e9f3e7, #2b4a3c);
+      --ff-sauce: light-dark(#6d351e, #ab653b);
+      --ff-shell: light-dark(#edbc64, #d9a448);
+      --ff-shell-edge: light-dark(#be7c2d, #9e6224);
+      --ff-filling: light-dark(#d49c45, #b27a32);
+      --ff-leaf: light-dark(#3d7438, #7aa94e);
+      --ff-onion: light-dark(#cb7a9d, #df9ebd);
+      --ff-egg: light-dark(#fff4bd, #f4e4a4);
+      color: var(--ff-ink); font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      width: 100%; background: transparent; line-height: 1.45; font-size: 15px;
+    }
+    #bsa-fuchka-game * { box-sizing: border-box; }
+    #bsa-fuchka-game [hidden] { display: none !important; }
+    #bsa-fuchka-game button { font: inherit; color: inherit; touch-action: manipulation; }
+    #bsa-fuchka-game .ff-window { background: var(--ff-paper); border-radius: 24px; padding: 24px; overflow: hidden; }
+    #bsa-fuchka-game .ff-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+    #bsa-fuchka-game .ff-brand { display: flex; align-items: center; gap: 9px; font-size: 11px; font-weight: 750; letter-spacing: .13em; }
+    #bsa-fuchka-game .ff-flag { display: inline-block; width: 27px; height: 19px; border-radius: 3px; background: #006a4e; position: relative; }
+    #bsa-fuchka-game .ff-flag::after { content: ""; width: 11px; height: 11px; border-radius: 50%; background: #f42a41; position: absolute; top: 4px; left: 7px; }
+    #bsa-fuchka-game .ff-best { color: var(--ff-quiet); font-size: 12px; }
+    #bsa-fuchka-game h2 { font-size: clamp(28px, 6vw, 42px); line-height: 1.12; font-weight: 800; letter-spacing: -.045em; margin: 19px 0 7px; color: var(--ff-ink); }
+    #bsa-fuchka-game .ff-sub { color: var(--ff-quiet); margin: 0 0 18px; font-size: 14px; }
+    #bsa-fuchka-game .ff-stats { display: flex; gap: 14px; align-items: center; justify-content: space-between; padding-bottom: 12px; }
+    #bsa-fuchka-game .ff-stat { display: flex; align-items: baseline; gap: 7px; }
+    #bsa-fuchka-game .ff-number { font-size: 26px; font-weight: 750; font-variant-numeric: tabular-nums; }
+    #bsa-fuchka-game .ff-label { color: var(--ff-quiet); font-size: 12px; }
+    #bsa-fuchka-game .ff-meter { height: 5px; background: var(--ff-line); border-radius: 9px; overflow: hidden; }
+    #bsa-fuchka-game .ff-meter-fill { background: var(--ff-green); width: 100%; height: 100%; }
+    #bsa-fuchka-game .ff-meter-fill.ff-low { background: var(--ff-red); }
+    #bsa-fuchka-game .ff-counter { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 17px 0 13px; align-items: stretch; }
+    #bsa-fuchka-game .ff-ticket { background: var(--ff-panel); padding: 15px; border: 1px solid var(--ff-line); border-radius: 15px; min-width: 0; }
+    #bsa-fuchka-game .ff-eyebrow { color: var(--ff-quiet); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    #bsa-fuchka-game .ff-ticket-title { margin: 5px 0 11px; font-size: 18px; font-weight: 700; }
+    #bsa-fuchka-game .ff-ticket-items { display: flex; flex-wrap: wrap; gap: 7px; }
+    #bsa-fuchka-game .ff-ticket-chip { background: var(--ff-soft); border-radius: 7px; padding: 5px 9px; font-size: 13px; }
+    #bsa-fuchka-game .ff-stage { display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 0; gap: 8px; }
+    #bsa-fuchka-game .ff-plate { width: min(100%, 238px); padding: 19px 12px; border-radius: 50%; background: var(--ff-panel); border: 6px solid var(--ff-soft); display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; transform: rotate(-4deg); }
+    #bsa-fuchka-game .ff-shell { position: relative; aspect-ratio: 1; background: var(--ff-shell); border: 2px solid var(--ff-shell-edge); border-radius: 48% 52% 44% 52%; }
+    #bsa-fuchka-game .ff-shell::before { content: ""; position: absolute; inset: 24% 18% 17%; background: var(--ff-filling); border-radius: 49% 44% 53% 48%; border: 2px solid var(--ff-shell-edge); }
+    #bsa-fuchka-game .ff-sauce, #bsa-fuchka-game .ff-topping { position: absolute; z-index: 1; opacity: 0; }
+    #bsa-fuchka-game .ff-sauce { inset: 31% 27% 24%; border-radius: 50%; background: var(--ff-sauce); }
+    #bsa-fuchka-game .ff-topping { border-radius: 2px; height: 9%; width: 23%; }
+    #bsa-fuchka-game .ff-chilli { top: 42%; left: 32%; background: var(--ff-leaf); transform: rotate(24deg); }
+    #bsa-fuchka-game .ff-onion { top: 56%; left: 43%; background: var(--ff-onion); transform: rotate(-28deg); }
+    #bsa-fuchka-game .ff-coriander { top: 37%; left: 51%; height: 15%; width: 19%; background: var(--ff-leaf); border-radius: 60% 5% 60% 5%; }
+    #bsa-fuchka-game .ff-egg { top: 62%; left: 26%; height: 8%; width: 36%; background: var(--ff-egg); transform: rotate(18deg); }
+    #bsa-fuchka-game .ff-plate[data-tamarind="true"] .ff-sauce,
+    #bsa-fuchka-game .ff-plate[data-chilli="true"] .ff-chilli,
+    #bsa-fuchka-game .ff-plate[data-onion="true"] .ff-onion,
+    #bsa-fuchka-game .ff-plate[data-coriander="true"] .ff-coriander,
+    #bsa-fuchka-game .ff-plate[data-egg="true"] .ff-egg { opacity: 1; }
+    #bsa-fuchka-game .ff-plate-label { font-size: 12px; color: var(--ff-quiet); text-align: center; }
+    #bsa-fuchka-game .ff-ingredients { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
+    #bsa-fuchka-game .ff-ingredient { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; min-height: 70px; padding: 10px 5px; border-radius: 12px; border: 1px solid var(--ff-line); background: var(--ff-panel); font-size: 12px; }
+    #bsa-fuchka-game .ff-ingredient[aria-pressed="true"] { background: var(--ff-green); color: var(--ff-on-green); border-color: var(--ff-green); }
+    #bsa-fuchka-game .ff-ingredient:disabled { opacity: .5; }
+    #bsa-fuchka-game .ff-key { font-size: 11px; font-weight: 700; }
+    #bsa-fuchka-game .ff-feedback { min-height: 40px; padding: 11px 0 8px; font-size: 13px; }
+    #bsa-fuchka-game .ff-feedback[data-kind="error"] { color: var(--ff-red); }
+    #bsa-fuchka-game .ff-actions { display: flex; gap: 8px; align-items: center; }
+    #bsa-fuchka-game .ff-action { padding: 12px 16px; min-height: 46px; border-radius: 12px; border: 1px solid var(--ff-line); background: var(--ff-panel); font-size: 14px; font-weight: 650; }
+    #bsa-fuchka-game .ff-primary { background: var(--ff-green); color: var(--ff-on-green); border-color: var(--ff-green); flex: 1; }
+    #bsa-fuchka-game .ff-foot { color: var(--ff-quiet); font-size: 11px; margin-top: 11px; display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+    #bsa-fuchka-game .ff-result { padding: 21px 0 17px; text-align: center; }
+    #bsa-fuchka-game .ff-result h3 { font-size: 24px; font-weight: 750; margin: 7px 0; }
+    #bsa-fuchka-game .ff-result-score { font-size: 62px; font-weight: 800; letter-spacing: -.05em; line-height: 1.1; }
+    #bsa-fuchka-game .ff-result p { margin: 8px 0; font-size: 14px; color: var(--ff-quiet); }
+    #bsa-fuchka-game .ff-pause { padding: 34px 12px; text-align: center; }
+    #bsa-fuchka-game .ff-pause h3 { font-size: 22px; }
+    @media (max-width: 470px) {
+      #bsa-fuchka-game .ff-window { padding: 17px 13px; border-radius: 18px; }
+      #bsa-fuchka-game .ff-counter { gap: 9px; }
+      #bsa-fuchka-game .ff-ticket { padding: 11px; }
+      #bsa-fuchka-game .ff-ticket-title { font-size: 16px; }
+      #bsa-fuchka-game .ff-ticket-chip { font-size: 12px; padding: 4px 6px; }
+      #bsa-fuchka-game .ff-plate { gap: 4px; padding: 14px 7px; border-width: 4px; }
+      #bsa-fuchka-game .ff-ingredients { grid-template-columns: repeat(3, minmax(0,1fr)); }
+      #bsa-fuchka-game .ff-ingredient { min-height: 53px; flex-direction: row; gap: 7px; }
+      #bsa-fuchka-game .ff-actions { flex-wrap: wrap; }
+      #bsa-fuchka-game .ff-primary { min-width: 50%; }
+    }
+  </style>
+  <section class="ff-window" aria-label="Fuchka Frenzy, a BSA club fair game">
+    <div class="ff-top">
+      <div class="ff-brand"><span class="ff-flag" aria-hidden="true"></span>BSA CLUB FAIR</div>
+      <span class="ff-best"><span data-best-scope>Best this session</span>: <strong data-best>0</strong></span>
+    </div>
+    <h2>Fuchka Frenzy</h2>
+    <p class="ff-sub">Match the order. Tap the toppings. Beat the clock.</p>
+    <div class="ff-stats">
+      <div class="ff-stat"><span class="ff-number" data-time>45</span><span class="ff-label">seconds</span></div>
+      <div class="ff-stat"><span class="ff-number" data-score>0</span><span class="ff-label">points</span></div>
+      <div class="ff-stat"><span class="ff-number" data-served>0</span><span class="ff-label">served</span></div>
+    </div>
+    <div class="ff-meter" role="progressbar" aria-label="Seconds remaining" aria-valuemin="0" aria-valuemax="45" aria-valuenow="45"><div class="ff-meter-fill"></div></div>
+    <div data-play-area>
+      <div class="ff-counter">
+        <div class="ff-ticket" aria-live="polite" aria-atomic="true">
+          <div class="ff-eyebrow" data-order-label>Practice ticket</div>
+          <div class="ff-ticket-title">Add exactly these:</div>
+          <div class="ff-ticket-items" data-order-items></div>
+        </div>
+        <div class="ff-stage">
+          <div class="ff-plate" role="img" aria-label="Six fuchka shells with potato and pea filling; no toppings selected" data-plate></div>
+          <div class="ff-plate-label">Potato &amp; pea filling included</div>
+        </div>
+      </div>
+      <div class="ff-ingredients" aria-label="Choose toppings">
+        <button class="ff-ingredient cursor-interaction" type="button" data-topping="tamarind" aria-pressed="false" disabled><span class="ff-key" aria-hidden="true">1</span>Tamarind</button>
+        <button class="ff-ingredient cursor-interaction" type="button" data-topping="chilli" aria-pressed="false" disabled><span class="ff-key" aria-hidden="true">2</span>Chilli</button>
+        <button class="ff-ingredient cursor-interaction" type="button" data-topping="onion" aria-pressed="false" disabled><span class="ff-key" aria-hidden="true">3</span>Onion</button>
+        <button class="ff-ingredient cursor-interaction" type="button" data-topping="coriander" aria-pressed="false" disabled><span class="ff-key" aria-hidden="true">4</span>Coriander</button>
+        <button class="ff-ingredient cursor-interaction" type="button" data-topping="egg" aria-pressed="false" disabled><span class="ff-key" aria-hidden="true">5</span>Egg</button>
+      </div>
+    </div>
+    <div class="ff-pause" data-pause-area hidden><h3>Taking a breather?</h3><p>Your round is paused.</p></div>
+    <div class="ff-result" data-result-area hidden aria-live="polite" aria-atomic="true">
+      <div class="ff-eyebrow">Round complete</div>
+      <h3 data-result-title>Nice serving!</h3>
+      <div class="ff-result-score" data-result-score>0</div>
+      <p data-result-detail></p>
+    </div>
+    <div class="ff-feedback" data-feedback role="status" aria-live="polite">45 seconds. Correct plate +10. Wrong plate −3.</div>
+    <div class="ff-actions">
+      <button class="ff-action ff-primary cursor-interaction" type="button" data-main>Start 45-second round</button>
+      <button class="ff-action cursor-interaction" type="button" data-pause hidden>Pause</button>
+    </div>
+    <div class="ff-foot"><span>Tap a topping again to remove it.</span><span>Keys 1–5 · Enter to serve</span></div>
+  </section>
+  <script>
+    (() => {
+      const root = document.getElementById('bsa-fuchka-game');
+      if (!root || root.dataset.initialized) return;
+      root.dataset.initialized = 'true';
+      const $ = selector => root.querySelector(selector);
+      const buttons = [...root.querySelectorAll('[data-topping]')];
+      const ids = ['tamarind', 'chilli', 'onion', 'coriander', 'egg'];
+      const names = {tamarind:'Tamarind', chilli:'Chilli', onion:'Onion', coriander:'Coriander', egg:'Egg'};
+      const selected = new Set();
+      const storageKey = 'bsa-fuchka-frenzy-best-v1';
+      let state = 'ready', score = 0, served = 0, mistakes = 0, best = 0;
+      let previousBest = 0, deadline = 0, remaining = 45000, timer = null;
+      let order = ['tamarind','chilli'];
+      try {
+        const saved = Number(localStorage.getItem(storageKey));
+        if (Number.isFinite(saved) && saved >= 0) best = Math.floor(saved);
+        localStorage.setItem(storageKey, String(best));
+        $('[data-best-scope]').textContent = 'Best on this browser';
+      } catch (_) {}
+      $('[data-best]').textContent = best;
+      const plate = $('[data-plate]');
+      for (let i = 0; i < 6; i++) {
+        const shell = document.createElement('div');
+        shell.className = 'ff-shell';
+        shell.setAttribute('aria-hidden','true');
+        shell.innerHTML = '<span class="ff-sauce"></span><span class="ff-topping ff-chilli"></span><span class="ff-topping ff-onion"></span><span class="ff-topping ff-coriander"></span><span class="ff-topping ff-egg"></span>';
+        plate.appendChild(shell);
+      }
+      function feedback(message, kind = '') {
+        $('[data-feedback]').textContent = message;
+        $('[data-feedback]').dataset.kind = kind;
+      }
+      function drawTicket() {
+        const items = $('[data-order-items]');
+        items.replaceChildren();
+        order.forEach(id => {
+          const chip = document.createElement('span');
+          chip.className = 'ff-ticket-chip'; chip.textContent = names[id];
+          items.appendChild(chip);
+        });
+        $('[data-order-label]').textContent = state === 'ready' ? 'Example order' : 'Order ' + (served + 1);
+      }
+      function drawPlate() {
+        buttons.forEach(button => {
+          const id = button.dataset.topping;
+          button.setAttribute('aria-pressed', String(selected.has(id)));
+          plate.dataset[id] = String(selected.has(id));
+        });
+        plate.setAttribute('aria-label', 'Six fuchka with potato and pea filling. Toppings: ' + (ids.filter(id => selected.has(id)).map(id => names[id]).join(', ') || 'none'));
+      }
+      function drawStats() {
+        $('[data-score]').textContent = score;
+        $('[data-served]').textContent = served;
+      }
+      function drawTime(ms) {
+        const seconds = Math.ceil(Math.max(0, ms) / 1000);
+        $('[data-time]').textContent = seconds;
+        $('.ff-meter').setAttribute('aria-valuenow', seconds);
+        $('.ff-meter-fill').style.width = (Math.max(0, ms) / 45000 * 100) + '%';
+        $('.ff-meter-fill').classList.toggle('ff-low', seconds <= 10);
+      }
+      function freshOrder() {
+        const extras = ids.slice(1);
+        for (let i = extras.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [extras[i],extras[j]] = [extras[j],extras[i]];
+        }
+        const count = served < 4 ? 1 + Math.floor(Math.random() * 2) : 2 + Math.floor(Math.random() * 2);
+        let next = ['tamarind', ...extras.slice(0, count)];
+        if (next.length === order.length && next.every(id => order.includes(id))) {
+          next = ['tamarind', ...extras.slice(1, count + 1)];
+        }
+        order = ids.filter(id => next.includes(id));
+        selected.clear(); drawTicket(); drawPlate();
+      }
+      function stopTimer() { if (timer !== null) clearInterval(timer); timer = null; }
+      function finish() {
+        if (state !== 'playing') return;
+        state = 'ended'; stopTimer(); remaining = 0; drawTime(0);
+        buttons.forEach(button => button.disabled = true);
+        $('[data-play-area]').hidden = true;
+        $('[data-pause-area]').hidden = true;
+        $('[data-result-area]').hidden = false;
+        $('[data-pause]').hidden = true;
+        $('[data-main]').textContent = 'Next player · play again';
+        $('[data-result-score]').textContent = score + ' pts';
+        $('[data-result-title]').textContent = score > previousBest ? 'New best score!' : served >= 10 ? 'Fuchka champion!' : served >= 5 ? 'The stall is yours!' : 'Nice serving!';
+        $('[data-result-detail]').textContent = served + ' correct plates · ' + mistakes + ' wrong ' + (mistakes === 1 ? 'plate' : 'plates');
+        feedback('Pass it to a friend. Can they beat ' + score + '?');
+        if (score > best) {
+          best = score; $('[data-best]').textContent = best;
+          try { localStorage.setItem(storageKey, String(best)); } catch (_) {}
+        }
+        $('[data-main]').focus({preventScroll:true});
+      }
+      function tick() {
+        if (state !== 'playing') return;
+        remaining = Math.max(0, deadline - performance.now());
+        drawTime(remaining);
+        if (remaining <= 0) finish();
+      }
+      function canPlay() {
+        if (state !== 'playing') return false;
+        if (performance.now() >= deadline) { tick(); return false; }
+        return true;
+      }
+      function start() {
+        stopTimer(); state = 'playing'; score = 0; served = 0; mistakes = 0;
+        previousBest = best; remaining = 45000;
+        $('[data-play-area]').hidden = false;
+        $('[data-result-area]').hidden = true;
+        $('[data-pause-area]').hidden = true;
+        $('[data-pause]').hidden = false;
+        $('[data-pause]').textContent = 'Pause';
+        $('[data-main]').textContent = 'Serve plate ↵';
+        buttons.forEach(button => button.disabled = false);
+        freshOrder(); drawStats(); drawTime(remaining);
+        feedback('Match the ticket exactly, then serve.');
+        deadline = performance.now() + remaining;
+        timer = setInterval(tick, 100);
+      }
+      function toggle(id) {
+        if (!canPlay()) return;
+        selected.has(id) ? selected.delete(id) : selected.add(id);
+        drawPlate();
+      }
+      function serve() {
+        if (!canPlay()) return;
+        if (order.length === selected.size && order.every(id => selected.has(id))) {
+          score += 10; served++; drawStats(); freshOrder();
+          feedback('+10! Next order is up.');
+        } else {
+          const lost = Math.min(3, score); score = Math.max(0, score - 3); mistakes++; drawStats();
+          const missing = order.filter(id => !selected.has(id)).map(id => names[id]);
+          const extra = [...selected].filter(id => !order.includes(id)).map(id => names[id]);
+          const details = [];
+          if (missing.length) details.push('add ' + missing.join(', '));
+          if (extra.length) details.push('remove ' + extra.join(', '));
+          feedback((lost ? '−' + lost + ' points. ' : 'Not quite. ') + details.join('; ') + '.', 'error');
+        }
+      }
+      function pause() {
+        if (!canPlay()) return;
+        remaining = Math.max(0, deadline - performance.now()); stopTimer(); state = 'paused';
+        $('[data-play-area]').hidden = true; $('[data-pause-area]').hidden = false;
+        $('[data-pause]').hidden = true; $('[data-main]').textContent = 'Resume round';
+        feedback('Ready when you are.');
+      }
+      function resume() {
+        state = 'playing'; deadline = performance.now() + remaining;
+        $('[data-play-area]').hidden = false; $('[data-pause-area]').hidden = true;
+        $('[data-pause]').hidden = false; $('[data-main]').textContent = 'Serve plate ↵';
+        feedback('Match the ticket exactly, then serve.'); timer = setInterval(tick,100);
+      }
+      buttons.forEach(button => button.addEventListener('click', () => toggle(button.dataset.topping)));
+      $('[data-main]').addEventListener('click', () => {
+        if (state === 'playing') serve(); else if (state === 'paused') resume(); else start();
+      });
+      $('[data-pause]').addEventListener('click', pause);
+      root.addEventListener('keydown', event => {
+        if (event.repeat || event.ctrlKey || event.metaKey || event.altKey) return;
+        if (state === 'playing' && /^[1-5]$/.test(event.key)) { event.preventDefault(); toggle(ids[Number(event.key) - 1]); }
+        if (state === 'playing' && event.key === 'Enter' && event.target !== $('[data-main]') && event.target !== $('[data-pause]')) { event.preventDefault(); serve(); }
+      });
+      document.addEventListener('visibilitychange', () => { if (document.hidden && state === 'playing') pause(); });
+      drawTicket(); drawPlate();
+    })();
+  </script>
+</div>
+
+</main></body></html>
