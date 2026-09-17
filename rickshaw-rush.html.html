@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><title>Rickshaw Rush | BSA Club Fair</title><style>html{color-scheme:light dark}body{margin:0;padding:24px 12px;background:light-dark(#eaf0e8,#0c1915)}main{max-width:680px;margin:0 auto}.cursor-interaction{cursor:pointer}button:disabled{cursor:default}@media(max-width:470px){body{padding:8px}}</style></head><body><main>
+<div id="bsa-rickshaw-rush">
+  <style>
+    #bsa-rickshaw-rush {
+      --rr-paper: light-dark(#fff9ee, #162b26);
+      --rr-panel: light-dark(#ffffff, #203b33);
+      --rr-ink: light-dark(#173d31, #f8f1de);
+      --rr-quiet: light-dark(#53685e, #bfd1c7);
+      --rr-line: light-dark(#d8e1d7, #496157);
+      --rr-green: light-dark(#006b4f, #a8ebbd);
+      --rr-on-green: light-dark(#ffffff, #123927);
+      --rr-red: light-dark(#aa3244, #ffb0bd);
+      --rr-road: light-dark(#42514d, #283d37);
+      --rr-sidewalk: light-dark(#e5d6b8, #5c5a43);
+      --rr-lane: light-dark(#c5d3bc, #9cac94);
+      --rr-grass: light-dark(#91ad78, #536d4d);
+      --rr-leaf: light-dark(#39754f, #416c50);
+      --rr-leaf-light: light-dark(#61935e, #6a8d60);
+      --rr-shop: light-dark(#ecb985, #a67756);
+      --rr-shop-two: light-dark(#aac6b6, #688777);
+      --rr-awning: light-dark(#df6355, #c45d50);
+      --rr-cream: light-dark(#fff4d5, #e9d6ae);
+      --rr-gold: light-dark(#ffd76a, #ffdc80);
+      --rr-gold-edge: light-dark(#a87726, #b28740);
+      --rr-barrier: light-dark(#f5a44a, #f4b46c);
+      --rr-dark: light-dark(#263e35, #1d2d26);
+      --rr-blue: light-dark(#3483a4, #65adc2);
+      --rr-shadow: light-dark(#263a3266, #091e1980);
+      --rr-shield: light-dark(#acf6c9, #b8ffcc);
+      --rr-veil: light-dark(#273d302e, #07181166);
+      color: var(--rr-ink); background: transparent; width: 100%;
+      font: 15px/1.45 ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    #bsa-rickshaw-rush * { box-sizing: border-box; }
+    #bsa-rickshaw-rush [hidden] { display: none !important; }
+    #bsa-rickshaw-rush button { font: inherit; touch-action: manipulation; }
+    #bsa-rickshaw-rush .rr-window { background: var(--rr-paper); padding: 24px; border-radius: 24px; }
+    #bsa-rickshaw-rush .rr-top { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    #bsa-rickshaw-rush .rr-brand { display: flex; align-items: center; gap: 9px; font-size: 11px; font-weight: 750; letter-spacing: .12em; }
+    #bsa-rickshaw-rush .rr-flag { width: 27px; height: 19px; border-radius: 3px; background: #006a4e; position: relative; display: inline-block; }
+    #bsa-rickshaw-rush .rr-flag::after { content: ""; position: absolute; width: 11px; height: 11px; border-radius: 50%; background: #f42a41; left: 7px; top: 4px; }
+    #bsa-rickshaw-rush .rr-best { font-size: 12px; color: var(--rr-quiet); }
+    #bsa-rickshaw-rush h2 { font-size: clamp(28px, 6vw, 42px); color: var(--rr-ink); letter-spacing: -.045em; line-height: 1.1; margin: 19px 0 7px; font-weight: 800; }
+    #bsa-rickshaw-rush .rr-sub { font-size: 14px; color: var(--rr-quiet); margin: 0 0 17px; }
+    #bsa-rickshaw-rush .rr-hud { display: flex; justify-content: space-between; align-items: center; gap: 12px; max-width: 560px; margin: 0 auto; }
+    #bsa-rickshaw-rush .rr-stat { display: flex; flex-direction: column; gap: 1px; }
+    #bsa-rickshaw-rush .rr-stat strong { font-size: 25px; line-height: 1.15; font-weight: 750; font-variant-numeric: tabular-nums; }
+    #bsa-rickshaw-rush .rr-stat span { font-size: 11px; color: var(--rr-quiet); }
+    #bsa-rickshaw-rush .rr-mini { min-height: 42px; color: var(--rr-quiet); padding: 7px 5px; border: 0; background: transparent; font-size: 12px; text-decoration: underline; text-underline-offset: 3px; }
+    #bsa-rickshaw-rush .rr-mini:disabled { opacity: .4; }
+    #bsa-rickshaw-rush .rr-screen { position: relative; max-width: 560px; margin: 13px auto 0; aspect-ratio: 480 / 420; border-radius: 18px; overflow: hidden; isolation: isolate; background: var(--rr-road); }
+    #bsa-rickshaw-rush canvas { display: block; width: 100%; height: 100%; touch-action: pan-y; }
+    #bsa-rickshaw-rush .rr-overlay { position: absolute; inset: 0; display: grid; place-items: center; padding: 12px; background: var(--rr-veil); }
+    #bsa-rickshaw-rush .rr-panel { width: min(100%, 280px); border-radius: 18px; background: var(--rr-paper); color: var(--rr-ink); padding: 21px 19px; text-align: center; }
+    #bsa-rickshaw-rush .rr-eyebrow { text-transform: uppercase; font-size: 10px; letter-spacing: .13em; font-weight: 750; color: var(--rr-quiet); }
+    #bsa-rickshaw-rush h3 { font-size: 23px; line-height: 1.15; letter-spacing: -.025em; font-weight: 750; margin: 7px 0 10px; }
+    #bsa-rickshaw-rush .rr-panel p { font-size: 13px; color: var(--rr-quiet); margin: 0 0 16px; }
+    #bsa-rickshaw-rush .rr-action { width: 100%; min-height: 47px; padding: 11px 12px; border-radius: 11px; border: 0; font-size: 14px; font-weight: 700; background: var(--rr-green); color: var(--rr-on-green); }
+    #bsa-rickshaw-rush .rr-secondary { background: var(--rr-panel); color: var(--rr-ink); border: 1px solid var(--rr-line); margin-top: 8px; }
+    #bsa-rickshaw-rush .rr-result { font-size: 37px; line-height: 1.1; font-weight: 800; letter-spacing: -.035em; margin: 10px 0; font-variant-numeric: tabular-nums; }
+    #bsa-rickshaw-rush .rr-toast { position: absolute; top: 12px; left: 50%; transform: translateX(-50%); max-width: 90%; background: var(--rr-paper); color: var(--rr-ink); padding: 7px 12px; border-radius: 8px; text-align: center; font-size: 12px; font-weight: 700; pointer-events: none; }
+    #bsa-rickshaw-rush .rr-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; max-width: 560px; margin: 12px auto 0; }
+    #bsa-rickshaw-rush .rr-steer { border: 1px solid var(--rr-line); background: var(--rr-panel); color: var(--rr-ink); border-radius: 12px; padding: 12px; min-height: 49px; font-weight: 700; }
+    #bsa-rickshaw-rush .rr-steer:disabled { opacity: .45; }
+    #bsa-rickshaw-rush .rr-legend { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 18px; margin: 14px auto 0; color: var(--rr-quiet); font-size: 12px; }
+    #bsa-rickshaw-rush .rr-legend > span { display: inline-flex; align-items: center; gap: 6px; }
+    #bsa-rickshaw-rush .rr-coin { display: inline-block; width: 15px; height: 15px; border-radius: 50%; background: var(--rr-gold); border: 2px solid var(--rr-gold-edge); }
+    #bsa-rickshaw-rush .rr-block { display: inline-block; width: 16px; height: 11px; border-radius: 2px; background: repeating-linear-gradient(135deg,var(--rr-barrier) 0 4px,var(--rr-dark) 4px 8px); }
+    #bsa-rickshaw-rush .rr-foot { color: var(--rr-quiet); font-size: 11px; text-align: center; margin-top: 10px; }
+    #bsa-rickshaw-rush .rr-sr { position: absolute; width: 1px; height: 1px; margin: -1px; clip-path: inset(50%); overflow: hidden; white-space: nowrap; }
+    #bsa-rickshaw-rush .rr-color-probe { display: none; }
+    @media (max-width: 470px) {
+      #bsa-rickshaw-rush .rr-window { padding: 17px 13px; border-radius: 18px; }
+      #bsa-rickshaw-rush .rr-hud { gap: 8px; }
+      #bsa-rickshaw-rush .rr-stat strong { font-size: 22px; }
+      #bsa-rickshaw-rush .rr-screen { border-radius: 13px; }
+      #bsa-rickshaw-rush .rr-panel { max-width: 245px; padding: 14px; }
+      #bsa-rickshaw-rush .rr-panel h3 { font-size: 20px; margin: 6px 0 8px; }
+      #bsa-rickshaw-rush .rr-panel p { font-size: 12px; margin-bottom: 11px; }
+      #bsa-rickshaw-rush .rr-result { font-size: 30px; margin: 6px 0; }
+      #bsa-rickshaw-rush .rr-controls { gap: 9px; }
+    }
+  </style>
+  <section class="rr-window" aria-label="Rickshaw Rush, a BSA arcade game">
+    <div class="rr-top"><div class="rr-brand"><span class="rr-flag" aria-hidden="true"></span>BSA CLUB FAIR</div><span class="rr-best"><span data-best-label>Session best</span>: <strong data-best>0</strong></span></div>
+    <h2>Rickshaw Rush</h2>
+    <p class="rr-sub">Three lanes. One colourful ride. Can you make it?</p>
+    <div class="rr-hud"><div class="rr-stat"><strong data-score>0</strong><span>points</span></div><div class="rr-stat"><strong data-time>45</strong><span>seconds</span></div><div class="rr-stat"><strong data-lives>3</strong><span>lives</span></div><button class="rr-mini cursor-interaction" type="button" data-pause disabled>Pause</button></div>
+    <div class="rr-screen">
+      <canvas width="960" height="840" data-canvas role="img" aria-label="Three-lane road. Steer the cycle rickshaw left and right to collect flag coins and avoid striped barriers." aria-describedby="rr-help">Use the left and right buttons to steer your rickshaw.</canvas>
+      <div class="rr-toast" data-toast hidden></div>
+      <div class="rr-overlay" data-overlay>
+        <div class="rr-panel">
+          <div class="rr-eyebrow" data-overlay-label>45-second challenge</div>
+          <h3 data-overlay-title>Your ride is waiting.</h3>
+          <div class="rr-result" data-final hidden></div>
+          <p data-overlay-note>Collect flag coins. Dodge roadblocks.<br>You have three lives.</p>
+          <button class="rr-action cursor-interaction" type="button" data-main>Start riding</button>
+          <button class="rr-action rr-secondary cursor-interaction" type="button" data-new-player hidden>New player</button>
+        </div>
+      </div>
+    </div>
+    <div class="rr-controls"><button class="rr-steer cursor-interaction" type="button" data-left disabled>← Steer left</button><button class="rr-steer cursor-interaction" type="button" data-right disabled>Steer right →</button></div>
+    <div class="rr-legend"><span><span class="rr-coin" aria-hidden="true"></span>Coin +10</span><span><span class="rr-block" aria-hidden="true"></span>Hit −1 life</span><span>Finish +50</span></div>
+    <div class="rr-foot" id="rr-help">← → or A / D to steer · Tap a lane or use the buttons · P to pause</div>
+    <div class="rr-sr" role="status" aria-live="polite" data-status>Ready to ride.</div>
+    <span class="rr-color-probe" aria-hidden="true" data-color-probe></span>
+  </section>
+  <script>
+    (() => {
+      const root = document.getElementById('bsa-rickshaw-rush');
+      if (!root || root.dataset.initialized) return;
+      root.dataset.initialized = 'true';
+      // ENGINE START
+      const RR_WIDTH = 480, RR_HEIGHT = 420, RR_DURATION = 45;
+      const RR_LANES = [400/3, 240, 1040/3], RR_PLAYER_Y = 335;
+      class RickshawEngine {
+        constructor(random = Math.random) { this.random = random; this.reset(); }
+        reset() {
+          this.state = 'ready'; this.elapsed = 0; this.score = 0; this.coins = 0; this.lives = 3;
+          this.targetLane = 1; this.x = RR_LANES[1]; this.invulnerable = 0;
+          this.entities = []; this.events = []; this.nextWave = 1; this.wave = 0;
+          this.lastSafe = 1; this.distance = 0; this.won = false;
+        }
+        start() { this.reset(); this.state = 'playing'; }
+        setLane(lane) { if (this.state === 'playing') this.targetLane = Math.max(0,Math.min(2,Math.round(lane))); }
+        move(direction) { this.setLane(this.targetLane + direction); }
+        pause() { if (this.state === 'playing') this.state = 'paused'; }
+        resume() { if (this.state === 'paused') this.state = 'playing'; }
+        finish(won) {
+          if (this.state !== 'playing') return;
+          this.won = won; this.state = 'ended';
+          if (won) this.score += 50;
+          this.events.push({type:'end',won});
+        }
+        spawnWave() {
+          const possible = [0,1,2].filter(lane => Math.abs(lane-this.lastSafe) <= 1);
+          const safe = possible[Math.min(possible.length-1,Math.floor(this.random()*possible.length))];
+          this.lastSafe = safe; this.wave++;
+          const others = [0,1,2].filter(lane => lane !== safe);
+          if (this.random() < .5) others.reverse();
+          const twoBlocks = this.elapsed >= 12 && this.random() < .6;
+          for (const lane of others.slice(0,twoBlocks?2:1)) this.entities.push({kind:'barrier',lane,x:RR_LANES[lane],y:-45,done:false});
+          this.entities.push({kind:'coin',lane:safe,x:RR_LANES[safe],y:-45,done:false});
+          if (this.wave % 4 === 0) this.entities.push({kind:'coin',lane:safe,x:RR_LANES[safe],y:-94,done:false});
+          this.nextWave += 1.35 - .28*Math.min(1,this.elapsed/RR_DURATION);
+        }
+        step(seconds) {
+          if (this.state !== 'playing' || !Number.isFinite(seconds) || seconds <= 0) return;
+          let remaining = Math.min(seconds,RR_DURATION-this.elapsed);
+          while (remaining > .000001 && this.state === 'playing') {
+            const dt = Math.min(1/120,remaining); remaining -= dt;
+            this.elapsed = Math.min(RR_DURATION,this.elapsed+dt);
+            this.invulnerable = Math.max(0,this.invulnerable-dt);
+            const destination = RR_LANES[this.targetLane];
+            this.x += Math.max(-690*dt,Math.min(690*dt,destination-this.x));
+            const speed = 112+72*this.elapsed/RR_DURATION;
+            this.distance += speed*dt;
+            if (this.elapsed >= this.nextWave) this.spawnWave();
+            for (const object of this.entities) {
+              if (object.done) continue;
+              object.y += speed*dt;
+              const dx = Math.abs(object.x-this.x), dy = Math.abs(object.y-RR_PLAYER_Y);
+              if (object.kind === 'coin' && dx < 32 && dy < 37) {
+                object.done = true; this.coins++; this.score += 10;
+                this.events.push({type:'coin'});
+              } else if (object.kind === 'barrier' && dx < 48 && dy < 38) {
+                object.done = true;
+                if (this.invulnerable <= 0) {
+                  this.lives--; this.invulnerable = 1.2; this.events.push({type:'hit',lives:this.lives});
+                  if (this.lives <= 0) { this.finish(false); break; }
+                }
+              }
+            }
+            this.entities = this.entities.filter(object => !object.done && object.y < RR_HEIGHT+65);
+            if (this.state === 'playing' && this.elapsed >= RR_DURATION-.000001) { this.elapsed = RR_DURATION; this.finish(true); }
+          }
+        }
+        drainEvents() { const out = this.events; this.events = []; return out; }
+      }
+      // ENGINE END
+      // RENDERER START
+      function drawRickshawScene(ctx, game, p, reducedMotion = false) {
+        const round = (x,y,w,h,r,fill) => { ctx.fillStyle=fill; ctx.beginPath(); ctx.roundRect(x,y,w,h,r); ctx.fill(); };
+        const circle = (x,y,r,fill) => { ctx.fillStyle=fill; ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fill(); };
+        const line = (x1,y1,x2,y2,width,color) => { ctx.strokeStyle=color; ctx.lineWidth=width; ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke(); };
+        const shift = reducedMotion ? 0 : game.distance;
+        ctx.clearRect(0,0,RR_WIDTH,RR_HEIGHT);
+        ctx.fillStyle=p.grass; ctx.fillRect(0,0,RR_WIDTH,RR_HEIGHT);
+        ctx.fillStyle=p.sidewalk; ctx.fillRect(52,0,29,RR_HEIGHT); ctx.fillRect(399,0,29,RR_HEIGHT);
+        ctx.fillStyle=p.road; ctx.fillRect(81,0,318,RR_HEIGHT);
+        for(let y=-72+(shift%72); y<RR_HEIGHT; y+=72) {
+          round(184,y,4,31,2,p.lane); round(291,y,4,31,2,p.lane);
+        }
+        line(82,0,82,RR_HEIGHT,3,p.cream); line(398,0,398,RR_HEIGHT,3,p.cream);
+        for(let y=-160+((shift*.75)%160); y<RR_HEIGHT+160; y+=160) {
+          round(-14,y,60,69,5,p.shadow); round(-18,y-5,60,68,4,p.shop);
+          round(-15,y+35,62,18,3,p.awning);
+          for(let k=0;k<4;k++)round(-10+k*17,y+35,8,18,1,p.cream);
+          round(7,y+3,22,22,2,p.dark); round(10,y+6,16,16,1,p.shopTwo);
+          round(434,y+55,64,74,5,p.shadow); round(429,y+50,64,74,4,p.shopTwo);
+          round(427,y+94,64,18,3,p.blue);
+          for(let k=0;k<4;k++)round(431+k*17,y+94,8,18,1,p.cream);
+          circle(26,y+121,24,p.shadow); circle(22,y+117,23,p.leaf); circle(15,y+108,14,p.leafLight);
+          circle(457,y+16,23,p.shadow); circle(453,y+12,23,p.leaf); circle(446,y+4,14,p.leafLight);
+          line(62,y+76,62,y+106,2,p.dark); round(62,y+77,16,11,1,'#006a4e'); circle(69,y+82.5,3.4,'#f42a41');
+        }
+        const sample = [{kind:'coin',x:RR_LANES[0],y:70},{kind:'barrier',x:RR_LANES[2],y:105},{kind:'coin',x:RR_LANES[1],y:204},{kind:'barrier',x:RR_LANES[0],y:262}];
+        const objects = game.state === 'ready' ? sample : game.entities;
+        objects.forEach(object => {
+          ctx.save(); ctx.translate(object.x,object.y);
+          if(object.kind === 'coin') {
+            circle(1,3,16,p.shadow); circle(0,0,16,p.goldEdge); circle(0,-1,13,p.gold);
+            round(-8,-6,16,10,1,'#006a4e'); circle(-1,-1,3,'#f42a41');
+            circle(-6,-9,2,p.cream);
+          } else {
+            round(-32,11,65,14,5,p.shadow);
+            round(-24,-3,6,24,2,p.dark); round(18,-3,6,24,2,p.dark);
+            round(-32,-17,64,28,3,p.barrier);
+            ctx.save(); ctx.beginPath(); ctx.roundRect(-32,-17,64,28,3); ctx.clip();
+            for(let x=-45;x<50;x+=22) {
+              ctx.fillStyle=p.dark; ctx.beginPath(); ctx.moveTo(x,-17); ctx.lineTo(x+11,-17); ctx.lineTo(x+29,11); ctx.lineTo(x+18,11); ctx.closePath(); ctx.fill();
+            }
+            ctx.restore(); circle(-23,-11,2,p.cream); circle(23,5,2,p.cream);
+          }
+          ctx.restore();
+        });
+        ctx.save(); ctx.translate(game.x,RR_PLAYER_Y);
+        if(!reducedMotion)ctx.rotate(Math.max(-.09,Math.min(.09,(RR_LANES[game.targetLane]-game.x)*.0012)));
+        ctx.fillStyle=p.shadow; ctx.beginPath(); ctx.ellipse(2,24,37,16,0,0,Math.PI*2); ctx.fill();
+        if(game.invulnerable>0 && game.state==='playing') {
+          ctx.strokeStyle=p.shield; ctx.lineWidth=3; ctx.beginPath(); ctx.ellipse(0,-8,39,59,0,0,Math.PI*2); ctx.stroke();
+        }
+        round(-4,-61,8,25,4,p.dark); round(-2,-60,2,22,1,p.cream);
+        line(0,-47,-20,17,3,p.cream); line(0,-47,20,17,3,p.cream);
+        line(-28,13,28,13,3,p.goldEdge);
+        round(-31,1,8,30,4,p.dark); round(23,1,8,30,4,p.dark);
+        round(-29,4,2,24,1,p.cream); round(25,4,2,24,1,p.cream);
+        line(-15,-39,15,-39,4,p.dark); line(-15,-39,-15,-34,3,p.gold); line(15,-39,15,-34,3,p.gold);
+        line(-5,-10,-10,-1,5,p.dark); line(5,-10,11,-4,5,p.dark);
+        round(-9,-29,18,22,7,p.blue);
+        line(-8,-24,-14,-36,4,p.shop); line(8,-24,14,-36,4,p.shop);
+        circle(0,-31,7,p.shop); circle(0,-34,5,p.dark);
+        round(-24,-3,48,39,8,p.awning); round(-20,0,40,31,6,'#006a4e');
+        ctx.strokeStyle=p.gold; ctx.lineWidth=2; ctx.beginPath(); ctx.roundRect(-19,1,38,28,5); ctx.stroke();
+        round(-16,5,32,20,4,p.blue);
+        for(let i=0;i<6;i++){const a=i*Math.PI/3;circle(Math.cos(a)*6,15+Math.sin(a)*6,3.1,p.cream);}
+        circle(0,15,4,p.awning); circle(0,15,1.5,p.gold);
+        circle(-17,31,2.5,p.gold); circle(17,31,2.5,p.gold);
+        ctx.restore();
+      }
+      // RENDERER END
+      const $ = selector => root.querySelector(selector);
+      const canvas = $('[data-canvas]'), ctx = canvas.getContext('2d');
+      const game = new RickshawEngine();
+      const storeKey = 'bsa-rickshaw-rush-best-v1';
+      let best=0, recordBefore=0, frameId=null, lastFrame=0, toastUntil=0, pointerStart=null;
+      let palette={}, pixelRatio=1, renderWidth=480, renderHeight=420;
+      const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      try {
+        const value=Number(localStorage.getItem(storeKey));
+        if(Number.isFinite(value)&&value>=0)best=Math.floor(value);
+        localStorage.setItem(storeKey,String(best)); $('[data-best-label]').textContent='Best on this browser';
+      } catch (_) {}
+      $('[data-best]').textContent=best;
+      function colors() {
+        const names=['road','sidewalk','lane','grass','leaf','leaf-light','shop','shop-two','awning','cream','gold','gold-edge','barrier','dark','blue','shadow','shield'];
+        const probe=$('[data-color-probe]');
+        for(const name of names){probe.style.color='var(--rr-'+name+')';palette[name.replace(/-([a-z])/g,(_,c)=>c.toUpperCase())]=getComputedStyle(probe).color;}
+      }
+      function draw() {
+        if(!ctx)return;
+        ctx.setTransform(canvas.width/RR_WIDTH,0,0,canvas.height/RR_HEIGHT,0,0);
+        drawRickshawScene(ctx,game,palette,motion.matches);
+      }
+      function resize() {
+        const rect=canvas.getBoundingClientRect();
+        renderWidth=Math.max(1,rect.width||480); renderHeight=renderWidth*RR_HEIGHT/RR_WIDTH;
+        pixelRatio=Math.min(2,window.devicePixelRatio||1);
+        canvas.width=Math.round(renderWidth*pixelRatio); canvas.height=Math.round(renderHeight*pixelRatio);
+        colors(); draw();
+      }
+      function hud() {
+        $('[data-score]').textContent=game.score; $('[data-lives]').textContent=game.lives;
+        $('[data-time]').textContent=Math.max(0,Math.ceil(RR_DURATION-game.elapsed));
+        $('[data-pause]').disabled=game.state!=='playing';
+        $('[data-left]').disabled=game.state!=='playing'; $('[data-right]').disabled=game.state!=='playing';
+      }
+      function stopFrames(){if(frameId!==null)cancelAnimationFrame(frameId);frameId=null;}
+      function toast(text,seconds=1.2){$('[data-toast]').textContent=text;$('[data-toast]').hidden=false;toastUntil=game.elapsed+seconds;}
+      function showEnd() {
+        stopFrames(); $('[data-overlay]').hidden=false; $('[data-final]').hidden=false;
+        $('[data-overlay-label]').textContent=game.score>recordBefore?'New best score!':'Round complete';
+        $('[data-overlay-title]').textContent=game.won?'You made it!':'Out of lives!';
+        $('[data-final]').textContent=game.score+' points';
+        $('[data-overlay-note]').textContent=game.coins+' coins collected'+(game.won?' · +50 finish bonus.':'. Give it another go!');
+        $('[data-main]').textContent='Next player · ride again'; $('[data-new-player]').hidden=true; $('[data-toast]').hidden=true;
+        if(game.score>best){best=game.score;$('[data-best]').textContent=best;try{localStorage.setItem(storeKey,String(best));}catch(_){}}
+        $('[data-status]').textContent=(game.won?'Finished! ':'Round over. ')+game.score+' points.';
+        hud();draw();$('[data-main]').focus({preventScroll:true});
+      }
+      function consumeEvents(){
+        for(const event of game.drainEvents()){
+          if(event.type==='coin')toast('+10',.55);
+          if(event.type==='hit'){toast(event.lives+' '+(event.lives===1?'life':'lives')+' left');$('[data-status]').textContent='Hit a barrier. '+event.lives+' lives left.';}
+          if(event.type==='end')showEnd();
+        }
+      }
+      function frame(now){
+        frameId=null;
+        if(game.state!=='playing')return;
+        const dt=(now-lastFrame)/1000;lastFrame=now;
+        if(dt>.8){pause();return;}
+        game.step(dt);consumeEvents();hud();
+        if(game.elapsed>=toastUntil)$('[data-toast]').hidden=true;
+        draw();if(game.state==='playing')frameId=requestAnimationFrame(frame);
+      }
+      function start(){
+        if(!ctx)return;
+        stopFrames();recordBefore=best;game.start();toastUntil=0;
+        $('[data-overlay]').hidden=true;$('[data-final]').hidden=true;$('[data-toast]').hidden=true;
+        $('[data-status]').textContent='Ride started. Three lives. Use left and right to steer.';
+        hud();draw();lastFrame=performance.now();frameId=requestAnimationFrame(frame);$('[data-left]').focus({preventScroll:true});
+      }
+      function pause(){
+        if(game.state!=='playing')return;game.pause();stopFrames();
+        $('[data-overlay]').hidden=false;$('[data-final]').hidden=true;$('[data-toast]').hidden=true;
+        $('[data-overlay-label]').textContent='Take a breather';$('[data-overlay-title]').textContent='Ride paused';
+        $('[data-overlay-note]').textContent='Your time, points and lives are saved.';
+        $('[data-main]').textContent='Resume riding';$('[data-new-player]').hidden=false;
+        $('[data-status]').textContent='Ride paused.';hud();draw();$('[data-main]').focus({preventScroll:true});
+      }
+      function resume(){
+        if(game.state!=='paused')return;game.resume();$('[data-overlay]').hidden=true;
+        lastFrame=performance.now();hud();draw();frameId=requestAnimationFrame(frame);$('[data-left]').focus({preventScroll:true});
+      }
+      $('[data-main]').addEventListener('click',()=>{if(game.state==='paused')resume();else start();});
+      $('[data-new-player]').addEventListener('click',start);
+      $('[data-left]').addEventListener('click',()=>game.move(-1));
+      $('[data-right]').addEventListener('click',()=>game.move(1));
+      $('[data-pause]').addEventListener('click',pause);
+      root.addEventListener('keydown',event=>{
+        if(event.ctrlKey||event.metaKey||event.altKey)return;
+        const key=event.key.toLowerCase();
+        if(game.state==='playing'&&['arrowleft','a','arrowright','d'].includes(key)){
+          event.preventDefault();if(!event.repeat)game.move(key==='arrowleft'||key==='a'?-1:1);
+        }else if((key==='p'||key==='escape')&&!event.repeat){
+          if(game.state==='playing'){event.preventDefault();pause();}else if(game.state==='paused'){event.preventDefault();resume();}
+        }
+      });
+      canvas.addEventListener('pointerdown',event=>{
+        if(game.state!=='playing')return;
+        pointerStart={x:event.clientX,y:event.clientY,id:event.pointerId};
+      });
+      canvas.addEventListener('pointerup',event=>{
+        if(game.state!=='playing'||!pointerStart||pointerStart.id!==event.pointerId)return;
+        const dx=event.clientX-pointerStart.x,dy=event.clientY-pointerStart.y;pointerStart=null;
+        if(Math.abs(dy)>Math.max(24,Math.abs(dx)))return;
+        const rect=canvas.getBoundingClientRect();
+        if(Math.abs(dx)>24)game.move(dx>0?1:-1);
+        else game.setLane(Math.floor(((event.clientX-rect.left)*RR_WIDTH/rect.width-80)/(320/3)));
+        $('[data-left]').focus({preventScroll:true});
+      });
+      canvas.addEventListener('pointercancel',()=>{pointerStart=null;});
+      document.addEventListener('visibilitychange',()=>{if(document.hidden)pause();});
+      window.addEventListener('blur',pause);
+      const observer=new ResizeObserver(resize);observer.observe(canvas);
+      const themeObserver=new MutationObserver(()=>{colors();draw();});
+      themeObserver.observe(document.documentElement,{attributes:true,attributeFilter:['class','style','data-theme']});
+      if(document.body)themeObserver.observe(document.body,{attributes:true,attributeFilter:['class','style','data-theme']});
+      const scheme=window.matchMedia('(prefers-color-scheme: dark)');
+      scheme.addEventListener('change',()=>{colors();draw();});motion.addEventListener('change',draw);
+      if(!ctx){$('[data-overlay-title]').textContent='Canvas is unavailable';$('[data-overlay-note]').textContent='Open this game in a current version of Chrome, Edge, Firefox or Safari.';$('[data-main]').disabled=true;}
+      hud();resize();
+    })();
+  </script>
+</div>
+
+</main></body></html>

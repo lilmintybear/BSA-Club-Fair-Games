@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><title>Bangla or Bluff | BSA Club Fair</title><style>html{color-scheme:light dark}body{margin:0;padding:24px 12px;background:light-dark(#eaf0e8,#0c1915)}main{max-width:780px;margin:0 auto}.cursor-interaction{cursor:pointer}button:disabled{cursor:default}@media(max-width:470px){body{padding:8px}}</style></head><body><main>
+<div id="bsa-bangla-bluff">
+  <style>
+    #bsa-bangla-bluff {
+      --bb-paper: light-dark(#fff9ee, #162b26);
+      --bb-panel: light-dark(#ffffff, #203b33);
+      --bb-ink: light-dark(#173d31, #f8f1de);
+      --bb-quiet: light-dark(#53685e, #bfd1c7);
+      --bb-line: light-dark(#d8e1d7, #496157);
+      --bb-green: light-dark(#006b4f, #a8ebbd);
+      --bb-on-green: light-dark(#ffffff, #123927);
+      --bb-red: light-dark(#a93245, #ffb0bd);
+      --bb-on-red: light-dark(#ffffff, #491323);
+      --bb-soft: light-dark(#eaf3e7, #294b3c);
+      --bb-pink: light-dark(#fae9e8, #4d2831);
+      color: var(--bb-ink); background: transparent; width: 100%;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 15px; line-height: 1.5;
+    }
+    #bsa-bangla-bluff * { box-sizing: border-box; }
+    #bsa-bangla-bluff [hidden] { display: none !important; }
+    #bsa-bangla-bluff button, #bsa-bangla-bluff input { font: inherit; }
+    #bsa-bangla-bluff button { touch-action: manipulation; }
+    #bsa-bangla-bluff a { color: var(--bb-green); text-underline-offset: 3px; }
+    #bsa-bangla-bluff .bb-window { padding: 25px; background: var(--bb-paper); border-radius: 24px; }
+    #bsa-bangla-bluff .bb-top { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: center; }
+    #bsa-bangla-bluff .bb-brand { display: flex; align-items: center; gap: 9px; font-size: 11px; letter-spacing: .12em; font-weight: 750; }
+    #bsa-bangla-bluff .bb-flag { display: inline-block; position: relative; width: 27px; height: 19px; border-radius: 3px; background: #006a4e; }
+    #bsa-bangla-bluff .bb-flag::after { content: ""; position: absolute; width: 11px; height: 11px; border-radius: 50%; background: #f42a41; left: 7px; top: 4px; }
+    #bsa-bangla-bluff .bb-best { font-size: 12px; color: var(--bb-quiet); }
+    #bsa-bangla-bluff h2 { color: var(--bb-ink); font-size: clamp(28px, 6vw, 42px); line-height: 1.1; letter-spacing: -.045em; margin: 20px 0 8px; font-weight: 800; }
+    #bsa-bangla-bluff .bb-subtitle { font-size: 14px; color: var(--bb-quiet); margin: 0 0 22px; }
+    #bsa-bangla-bluff .bb-welcome { text-align: center; padding: 20px 10px 25px; }
+    #bsa-bangla-bluff .bb-pair { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+    #bsa-bangla-bluff .bb-sample { border-radius: 18px; padding: 17px 25px; min-width: 140px; background: var(--bb-soft); color: var(--bb-green); }
+    #bsa-bangla-bluff .bb-sample:last-child { background: var(--bb-pink); color: var(--bb-red); }
+    #bsa-bangla-bluff .bb-sample strong { display: block; font-size: 24px; font-weight: 750; }
+    #bsa-bangla-bluff .bb-sample span { font-size: 12px; }
+    #bsa-bangla-bluff .bb-or { font-size: 12px; color: var(--bb-quiet); }
+    #bsa-bangla-bluff .bb-welcome p { color: var(--bb-quiet); margin: 17px 0 0; font-size: 14px; }
+    #bsa-bangla-bluff .bb-mode { display: flex; align-items: center; gap: 10px; padding: 12px 0; margin-bottom: 9px; font-size: 14px; }
+    #bsa-bangla-bluff .bb-mode input { width: 19px; height: 19px; accent-color: var(--bb-green); margin: 0; }
+    #bsa-bangla-bluff .bb-mode span small { display: block; color: var(--bb-quiet); font-size: 12px; }
+    #bsa-bangla-bluff .bb-button { min-height: 48px; padding: 12px 17px; border-radius: 12px; border: 1px solid var(--bb-line); color: var(--bb-ink); background: var(--bb-panel); font-size: 14px; font-weight: 650; }
+    #bsa-bangla-bluff .bb-main { background: var(--bb-green); color: var(--bb-on-green); border-color: var(--bb-green); width: 100%; }
+    #bsa-bangla-bluff .bb-meta { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; font-size: 13px; }
+    #bsa-bangla-bluff .bb-meta strong { font-weight: 750; font-variant-numeric: tabular-nums; }
+    #bsa-bangla-bluff .bb-clock { display: flex; gap: 9px; align-items: center; }
+    #bsa-bangla-bluff .bb-mini { border: 0; background: transparent; padding: 7px 4px; min-height: 38px; color: var(--bb-quiet); font-size: 12px; text-decoration: underline; text-underline-offset: 3px; }
+    #bsa-bangla-bluff .bb-track { height: 5px; background: var(--bb-line); border-radius: 5px; overflow: hidden; margin: 8px 0 14px; }
+    #bsa-bangla-bluff .bb-fill { height: 100%; width: 100%; background: var(--bb-green); }
+    #bsa-bangla-bluff .bb-fill.bb-urgent { background: var(--bb-red); }
+    #bsa-bangla-bluff .bb-word-card { background: var(--bb-panel); border: 1px solid var(--bb-line); border-radius: 18px; text-align: center; padding: 27px 12px 25px; }
+    #bsa-bangla-bluff .bb-eyebrow { font-size: 11px; letter-spacing: .1em; font-weight: 700; text-transform: uppercase; color: var(--bb-quiet); }
+    #bsa-bangla-bluff .bb-word { font-size: clamp(31px, 7vw, 54px); line-height: 1.15; font-weight: 800; letter-spacing: -.035em; margin: 12px 0 6px; overflow-wrap: anywhere; }
+    #bsa-bangla-bluff .bb-bengali { font-family: "Nirmala UI", "Bangla Sangam MN", "Noto Sans Bengali", sans-serif; font-size: 27px; line-height: 1.6; color: var(--bb-quiet); overflow-wrap: anywhere; }
+    #bsa-bangla-bluff .bb-choices { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 15px 0 0; }
+    #bsa-bangla-bluff .bb-choice { min-width: 0; min-height: 81px; border: 0; border-radius: 14px; padding: 12px; background: var(--bb-green); color: var(--bb-on-green); }
+    #bsa-bangla-bluff .bb-choice:last-child { background: var(--bb-red); color: var(--bb-on-red); }
+    #bsa-bangla-bluff .bb-choice strong { display: block; font-size: 21px; font-weight: 750; }
+    #bsa-bangla-bluff .bb-choice span { display: block; font-size: 12px; }
+    #bsa-bangla-bluff .bb-choice:disabled { opacity: .65; }
+    #bsa-bangla-bluff .bb-feedback { padding: 18px 0 15px; }
+    #bsa-bangla-bluff .bb-verdict { font-size: 19px; font-weight: 750; color: var(--bb-green); margin-bottom: 4px; }
+    #bsa-bangla-bluff .bb-feedback[data-correct="false"] .bb-verdict { color: var(--bb-red); }
+    #bsa-bangla-bluff .bb-meaning { font-size: 15px; }
+    #bsa-bangla-bluff .bb-source { display: inline-block; margin-top: 7px; font-size: 12px; }
+    #bsa-bangla-bluff .bb-pause { padding: 30px 0; text-align: center; }
+    #bsa-bangla-bluff h3 { font-size: 23px; letter-spacing: -.02em; margin: 8px 0; font-weight: 750; }
+    #bsa-bangla-bluff .bb-pause p { color: var(--bb-quiet); margin: 0 0 20px; }
+    #bsa-bangla-bluff .bb-pause .bb-button + .bb-button { margin-top: 9px; width: 100%; }
+    #bsa-bangla-bluff .bb-result { text-align: center; padding: 13px 0 8px; }
+    #bsa-bangla-bluff .bb-final { font-size: 66px; letter-spacing: -.05em; line-height: 1.15; font-weight: 800; margin: 12px 0; font-variant-numeric: tabular-nums; }
+    #bsa-bangla-bluff .bb-result p { color: var(--bb-quiet); font-size: 14px; margin: 4px 0 18px; }
+    #bsa-bangla-bluff details { margin: 16px 0; text-align: left; }
+    #bsa-bangla-bluff summary { color: var(--bb-quiet); font-size: 13px; padding: 8px 0; }
+    #bsa-bangla-bluff .bb-review { list-style: none; margin: 0; padding: 0; }
+    #bsa-bangla-bluff .bb-review li { padding: 10px 0; border-bottom: 1px solid var(--bb-line); font-size: 13px; }
+    #bsa-bangla-bluff .bb-review strong { display: block; font-weight: 700; }
+    #bsa-bangla-bluff .bb-review span { color: var(--bb-quiet); }
+    #bsa-bangla-bluff .bb-foot { font-size: 11px; color: var(--bb-quiet); display: flex; gap: 9px; justify-content: space-between; flex-wrap: wrap; margin-top: 15px; }
+    #bsa-bangla-bluff .bb-about { border-top: 1px solid var(--bb-line); margin: 14px 0 0; padding-top: 4px; }
+    #bsa-bangla-bluff .bb-about p { color: var(--bb-quiet); font-size: 12px; margin: 6px 0; }
+    @media (max-width: 470px) {
+      #bsa-bangla-bluff .bb-window { padding: 18px 14px; border-radius: 18px; }
+      #bsa-bangla-bluff .bb-welcome { padding: 13px 0 15px; }
+      #bsa-bangla-bluff .bb-pair { gap: 8px; }
+      #bsa-bangla-bluff .bb-sample { min-width: 0; flex: 1; padding: 14px 7px; }
+      #bsa-bangla-bluff .bb-sample strong { font-size: 21px; }
+      #bsa-bangla-bluff .bb-word-card { padding: 23px 10px; }
+      #bsa-bangla-bluff .bb-choices { gap: 9px; }
+      #bsa-bangla-bluff .bb-mini { min-height: 44px; padding: 8px 5px; }
+    }
+  </style>
+  <section class="bb-window" aria-label="Bangla or Bluff, BSA word game">
+    <div class="bb-top">
+      <div class="bb-brand"><span class="bb-flag" aria-hidden="true"></span>BSA CLUB FAIR</div>
+      <span class="bb-best"><span data-best-label>Session best</span>: <strong data-best>0/8</strong></span>
+    </div>
+    <h2>Bangla or Bluff?</h2>
+    <p class="bb-subtitle">Real Bangla word, or did we make it up?</p>
+    <div data-home>
+      <div class="bb-welcome">
+        <div class="bb-pair" aria-hidden="true"><div class="bb-sample"><strong>Bangla</strong><span>A real word</span></div><span class="bb-or">or</span><div class="bb-sample"><strong>Bluff</strong><span>Our invention</span></div></div>
+        <p>8 words. Trust your instincts.<br>Learn the meanings as you play.</p>
+      </div>
+      <label class="bb-mode cursor-interaction"><input type="checkbox" data-untimed><span>No timer<small>Leave off for an 8-second countdown per word.</small></span></label>
+      <button class="bb-button bb-main cursor-interaction" type="button" data-start>Let’s play</button>
+    </div>
+    <div data-game hidden>
+      <div class="bb-meta"><span>Word <strong data-progress>1/8</strong></span><span>Correct <strong data-score>0</strong></span><div class="bb-clock"><strong data-time>8s</strong><button class="bb-mini cursor-interaction" type="button" data-pause>Pause</button></div></div>
+      <div class="bb-track" role="progressbar" aria-label="Seconds left to answer" aria-valuemin="0" aria-valuemax="8" aria-valuenow="8"><div class="bb-fill"></div></div>
+      <div data-question-area>
+        <div class="bb-word-card" aria-live="polite" aria-atomic="true"><div class="bb-eyebrow">Bangla or bluff?</div><div class="bb-word" data-word></div><div class="bb-bengali" lang="bn" data-bengali></div></div>
+        <div class="bb-choices"><button class="bb-choice cursor-interaction" type="button" data-answer="real"><strong>Bangla</strong><span>Real word · B</span></button><button class="bb-choice cursor-interaction" type="button" data-answer="fake"><strong>Bluff</strong><span>Made up · F</span></button></div>
+        <div class="bb-feedback" data-feedback hidden role="status" aria-live="polite" aria-atomic="true"><div class="bb-verdict" data-verdict></div><div class="bb-meaning" data-meaning></div><a class="bb-source" data-source target="_blank" rel="noopener noreferrer" hidden>Word reference ↗</a></div>
+        <button class="bb-button bb-main cursor-interaction" type="button" data-next hidden>Next word →</button>
+      </div>
+    </div>
+    <div class="bb-pause" data-paused hidden><h3>Round paused</h3><p>Take your time. Your score is safe.</p><button class="bb-button bb-main cursor-interaction" type="button" data-resume>Resume round</button><button class="bb-button cursor-interaction" type="button" data-abandon>New player</button></div>
+    <div class="bb-result" data-results hidden aria-live="polite">
+      <div class="bb-eyebrow">Round complete</div><h3 data-result-title></h3><div class="bb-final" data-final></div><p data-result-note></p>
+      <button class="bb-button bb-main cursor-interaction" type="button" data-again>Next player · new round</button>
+      <button class="bb-mini cursor-interaction" type="button" data-settings>Change timer setting</button>
+      <details data-review-details><summary class="cursor-interaction">See this round’s answers</summary><ol class="bb-review" data-review></ol></details>
+    </div>
+    <div class="bb-foot"><span>32-word deck · shuffled rounds</span><span>B = Bangla · F = Bluff · Enter = next</span></div>
+    <details class="bb-about" data-about><summary class="cursor-interaction">About the words</summary><p>Real cards use established Bangla vocabulary. Bluff cards are playful decoys invented for this game, not a survey of every dialect or personal name. English-letter spellings are reading aids and can vary.</p><p>Each real answer includes its dictionary link. Play works offline; opening a reference needs internet.</p></details>
+  </section>
+  <script type="application/json" id="bb-word-bank">
+    [
+      {"id":"r01","roman":"Adda","bangla":"আড্ডা","real":true,"meaning":"An informal get-together or chat.","source":"https://en.wiktionary.org/wiki/আড্ডা#Bengali"},
+      {"id":"r02","roman":"Brishti","bangla":"বৃষ্টি","real":true,"meaning":"Rain.","source":"https://en.wiktionary.org/wiki/বৃষ্টি#Bengali"},
+      {"id":"r03","roman":"Jonaki","bangla":"জোনাকি","real":true,"meaning":"A firefly.","source":"https://en.wiktionary.org/wiki/জোনাকি#Bengali"},
+      {"id":"r04","roman":"Mishti","bangla":"মিষ্টি","real":true,"meaning":"Sweet.","source":"https://en.wiktionary.org/wiki/মিষ্টি#Bengali"},
+      {"id":"r05","roman":"Jhal","bangla":"ঝাল","real":true,"meaning":"Spicy or hot in taste.","source":"https://en.wiktionary.org/wiki/ঝাল#Bengali"},
+      {"id":"r06","roman":"Bondhu","bangla":"বন্ধু","real":true,"meaning":"A friend.","source":"https://en.wiktionary.org/wiki/বন্ধু#Bengali"},
+      {"id":"r07","roman":"Ghuri","bangla":"ঘুড়ি","real":true,"meaning":"A kite.","source":"https://en.wiktionary.org/wiki/ঘুড়ি#Bengali"},
+      {"id":"r08","roman":"Projapoti","bangla":"প্রজাপতি","real":true,"meaning":"A butterfly.","source":"https://en.wiktionary.org/wiki/প্রজাপতি#Bengali"},
+      {"id":"r09","roman":"Alpona","bangla":"আলপনা","real":true,"meaning":"Decorative floor art with painted patterns.","source":"https://en.wiktionary.org/wiki/আলপনা#Bengali"},
+      {"id":"r10","roman":"Nodi","bangla":"নদী","real":true,"meaning":"A river.","source":"https://en.wiktionary.org/wiki/নদী#Bengali"},
+      {"id":"r11","roman":"Dhol","bangla":"ঢোল","real":true,"meaning":"A drum.","source":"https://en.wiktionary.org/wiki/ঢোল#Bengali"},
+      {"id":"r12","roman":"Bhat","bangla":"ভাত","real":true,"meaning":"Cooked rice.","source":"https://en.wiktionary.org/wiki/ভাত#Bengali"},
+      {"id":"r13","roman":"Pakhi","bangla":"পাখি","real":true,"meaning":"A bird.","source":"https://en.wiktionary.org/wiki/পাখি#Bengali"},
+      {"id":"r14","roman":"Golpo","bangla":"গল্প","real":true,"meaning":"A story.","source":"https://en.wiktionary.org/wiki/গল্প#Bengali"},
+      {"id":"r15","roman":"Shopno","bangla":"স্বপ্ন","real":true,"meaning":"A dream.","source":"https://en.wiktionary.org/wiki/স্বপ্ন#Bengali"},
+      {"id":"r16","roman":"Jhilmil","bangla":"ঝিলমিল","real":true,"meaning":"Glittering or glimmering.","source":"https://www.english-bangla.com/bntoen/index/ঝিলমিল"},
+      {"id":"f01","roman":"Jelpu","bangla":"জেলপু","real":false},
+      {"id":"f02","roman":"Bhumki","bangla":"ভুমকি","real":false},
+      {"id":"f03","roman":"Phomra","bangla":"ফমরা","real":false},
+      {"id":"f04","roman":"Jhapnuko","bangla":"ঝাপনুকো","real":false},
+      {"id":"f05","roman":"Dhulmuki","bangla":"ধুলমুকি","real":false},
+      {"id":"f06","roman":"Jomfiri","bangla":"জমফিরি","real":false},
+      {"id":"f07","roman":"Gomlashi","bangla":"গমলাশি","real":false},
+      {"id":"f08","roman":"Phelbuni","bangla":"ফেলবুনি","real":false},
+      {"id":"f09","roman":"Mepku","bangla":"মেপকু","real":false},
+      {"id":"f10","roman":"Bhunpeli","bangla":"ভুনপেলি","real":false},
+      {"id":"f11","roman":"Dumfaki","bangla":"দুমফাকি","real":false},
+      {"id":"f12","roman":"Jomruki","bangla":"জমরুকি","real":false},
+      {"id":"f13","roman":"Phepnali","bangla":"ফেপনালি","real":false},
+      {"id":"f14","roman":"Nufli","bangla":"নুফলি","real":false},
+      {"id":"f15","roman":"Jhefu","bangla":"ঝেফু","real":false},
+      {"id":"f16","roman":"Phugmi","bangla":"ফুগমি","real":false}
+    ]
+  </script>
+  <script>
+    (() => {
+      const root = document.getElementById('bsa-bangla-bluff');
+      if (!root || root.dataset.initialized) return;
+      root.dataset.initialized = 'true';
+      const $ = selector => root.querySelector(selector);
+      const bank = JSON.parse($('#bb-word-bank').textContent);
+      const answerButtons = [...root.querySelectorAll('[data-answer]')];
+      const key = 'bsa-bangla-bluff-best-v1';
+      const best = {timed:0, relaxed:0};
+      let saved = false, state = 'home', mode = 'timed', deck = [], index = 0, score = 0;
+      let timer = null, deadline = 0, remaining = 8000, history = [], oldBest = 0;
+      const bags = {real:[], fake:[]};
+      try {
+        const stored = JSON.parse(localStorage.getItem(key) || '{}');
+        ['timed','relaxed'].forEach(k => { if (Number.isInteger(stored[k]) && stored[k] >= 0 && stored[k] <= 8) best[k] = stored[k]; });
+        localStorage.setItem(key, JSON.stringify(best)); saved = true;
+      } catch (_) {}
+      function updateBest() {
+        $('[data-best-label]').textContent = (mode === 'timed' ? 'Timed' : 'No-timer') + (saved ? ' best' : ' session best');
+        $('[data-best]').textContent = best[mode] + '/8';
+      }
+      function shuffle(items) {
+        const copy = [...items];
+        for (let i = copy.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [copy[i],copy[j]] = [copy[j],copy[i]]; }
+        return copy;
+      }
+      function draw(type) {
+        if (bags[type].length < 4) bags[type] = shuffle(bank.filter(word => word.real === (type === 'real')));
+        return bags[type].splice(0,4);
+      }
+      function stopClock() { if (timer !== null) clearInterval(timer); timer = null; }
+      function showClock(ms) {
+        const seconds = Math.ceil(Math.max(0,ms)/1000);
+        $('[data-time]').textContent = mode === 'timed' ? seconds + 's' : 'No timer';
+        $('.bb-track').hidden = mode !== 'timed';
+        $('.bb-track').setAttribute('aria-valuenow', String(seconds));
+        $('.bb-fill').style.width = (Math.max(0,ms)/8000*100) + '%';
+        $('.bb-fill').classList.toggle('bb-urgent', seconds <= 3 && mode === 'timed');
+      }
+      function updateClock() {
+        if (state !== 'question' || mode !== 'timed') return;
+        remaining = Math.max(0,deadline - performance.now()); showClock(remaining);
+        if (remaining <= 0) answer(null);
+      }
+      function beginClock() {
+        deadline = performance.now() + remaining;
+        if (mode === 'timed') timer = setInterval(updateClock,100);
+      }
+      function showQuestion() {
+        stopClock(); state = 'question'; remaining = 8000;
+        const word = deck[index];
+        $('[data-game]').hidden = false; $('[data-paused]').hidden = true;
+        $('[data-question-area]').hidden = false;
+        $('[data-feedback]').hidden = true; $('[data-next]').hidden = true;
+        $('[data-source]').hidden = true; $('[data-source]').removeAttribute('href');
+        $('[data-pause]').hidden = false;
+        $('[data-progress]').textContent = (index + 1) + '/8';
+        $('[data-score]').textContent = score;
+        $('[data-word]').textContent = word.roman;
+        $('[data-bengali]').textContent = word.bangla;
+        answerButtons.forEach(button => button.disabled = false);
+        showClock(remaining); beginClock();
+        answerButtons[0].focus({preventScroll:true});
+      }
+      function start() {
+        stopClock(); mode = $('[data-untimed]').checked ? 'relaxed' : 'timed';
+        deck = shuffle([...draw('real'),...draw('fake')]); index = 0; score = 0; history = []; oldBest = best[mode];
+        $('[data-home]').hidden = true; $('[data-results]').hidden = true;
+        $('[data-about]').hidden = true; $('[data-about]').open = false;
+        $('[data-review-details]').open = false;
+        updateBest(); showQuestion();
+      }
+      function answer(choice) {
+        if (state !== 'question') return;
+        if (mode === 'timed') {
+          remaining = Math.max(0,deadline - performance.now());
+          if (remaining <= 0) choice = null;
+          showClock(remaining);
+        }
+        stopClock(); state = 'reveal';
+        const word = deck[index], correct = choice !== null && choice === word.real;
+        if (correct) score++;
+        history.push({word, correct, choice});
+        $('[data-score]').textContent = score;
+        answerButtons.forEach(button => button.disabled = true);
+        $('[data-pause]').hidden = true;
+        $('[data-feedback]').hidden = false;
+        $('[data-feedback]').dataset.correct = String(correct);
+        $('[data-verdict]').textContent = choice === null ? 'Time’s up!' : correct ? 'You got it!' : 'That one fooled you!';
+        $('[data-meaning]').textContent = word.real ? 'Bangla. ' + word.roman + ': ' + word.meaning : 'Bluff. ' + word.roman + ' is a decoy invented for this game.';
+        if (word.real) { $('[data-source]').href = word.source; $('[data-source]').hidden = false; }
+        $('[data-next]').textContent = index === 7 ? 'See my result →' : 'Next word →';
+        $('[data-next]').hidden = false;
+        $('[data-next]').focus({preventScroll:true});
+      }
+      function finish() {
+        stopClock(); state = 'results';
+        $('[data-game]').hidden = true; $('[data-results]').hidden = false;
+        $('[data-about]').hidden = false;
+        $('[data-final]').textContent = score + '/8';
+        $('[data-result-title]').textContent = score === 8 ? 'Nothing gets past you!' : score >= 6 ? 'Sharp instincts!' : score >= 4 ? 'Good guessing!' : 'Ready for a rematch?';
+        const headline = score > oldBest ? 'New best for this mode! ' : score === 8 ? 'A perfect round. ' : '';
+        $('[data-result-note]').textContent = headline + 'Pass it to a friend. Can they beat your score?';
+        if (score > best[mode]) { best[mode] = score; try { localStorage.setItem(key,JSON.stringify(best)); } catch (_) {} }
+        updateBest();
+        const list = $('[data-review]'); list.replaceChildren();
+        history.forEach(item => {
+          const row = document.createElement('li'), title = document.createElement('strong'), detail = document.createElement('span');
+          title.textContent = (item.correct ? '✓ ' : '✕ ') + item.word.roman + ' · ' + item.word.bangla;
+          detail.textContent = (item.choice === null ? 'No answer. ' : '') + (item.word.real ? 'Bangla: ' + item.word.meaning : 'Bluff: invented for this game.');
+          row.appendChild(title); row.appendChild(detail); list.appendChild(row);
+        });
+        $('[data-again]').focus({preventScroll:true});
+      }
+      function next() { if (state !== 'reveal') return; index++; if (index === 8) finish(); else showQuestion(); }
+      function pause() {
+        if (state !== 'question') return;
+        if (mode === 'timed') { updateClock(); if (state !== 'question') return; }
+        stopClock(); state = 'paused'; $('[data-game]').hidden = true; $('[data-paused]').hidden = false;
+        $('[data-resume]').focus({preventScroll:true});
+      }
+      function resume() {
+        if (state !== 'paused') return;
+        state = 'question'; $('[data-game]').hidden = false; $('[data-paused]').hidden = true; beginClock();
+        answerButtons[0].focus({preventScroll:true});
+      }
+      function home() {
+        stopClock(); state = 'home'; $('[data-home]').hidden = false;
+        $('[data-game]').hidden = true; $('[data-paused]').hidden = true; $('[data-results]').hidden = true; $('[data-about]').hidden = false;
+        mode = $('[data-untimed]').checked ? 'relaxed' : 'timed'; updateBest(); $('[data-start]').focus({preventScroll:true});
+      }
+      $('[data-start]').addEventListener('click',start);
+      $('[data-again]').addEventListener('click',start);
+      $('[data-next]').addEventListener('click',next);
+      $('[data-pause]').addEventListener('click',pause);
+      $('[data-resume]').addEventListener('click',resume);
+      $('[data-abandon]').addEventListener('click',home);
+      $('[data-settings]').addEventListener('click',home);
+      $('[data-untimed]').addEventListener('change',() => { mode = $('[data-untimed]').checked ? 'relaxed' : 'timed'; updateBest(); });
+      answerButtons.forEach(button => button.addEventListener('click',() => answer(button.dataset.answer === 'real')));
+      root.addEventListener('keydown',event => {
+        if (event.ctrlKey || event.altKey || event.metaKey || event.target.tagName === 'INPUT') return;
+        if (event.repeat) { if (['b','f','Enter',' '].includes(event.key.toLowerCase()) || event.key === 'Enter') event.preventDefault(); return; }
+        const pressed = event.key.toLowerCase();
+        if (state === 'question' && (pressed === 'b' || pressed === 'f')) { event.preventDefault(); answer(pressed === 'b'); }
+        else if (state === 'reveal' && event.key === 'Enter') { event.preventDefault(); next(); }
+      });
+      document.addEventListener('visibilitychange',() => { if (document.hidden && state === 'question') pause(); });
+      updateBest();
+    })();
+  </script>
+</div>
+
+</main></body></html>
